@@ -14,26 +14,24 @@ export default function ThreeScene() {
 
     const canvas = canvasRef.current;
     const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       45,
-      window.innerWidth / window.innerHeight,
+      canvas.clientWidth / canvas.clientHeight,
       0.1,
       1000
     );
     camera.position.set(0, -15, 20);
     scene.add(camera);
 
-    const light1 = new THREE.PointLight(0xff0000, 300);
+    const light1 = new THREE.PointLight(0xff0000, 150);
     light1.position.set(0, 10, 0);
-    // scene.add(light1);
 
-    const light2 = new THREE.PointLight(0x0000ff, 1000);
+    const light2 = new THREE.PointLight(0x0000ff, 200);
     light2.position.set(0, -10, 0);
-    // scene.add(light2);
 
     const orbit = new OrbitControls(camera, renderer.domElement);
     orbit.enableZoom = false;
@@ -114,7 +112,7 @@ export default function ThreeScene() {
           Loading...
         </div>
       )}
-      <canvas ref={canvasRef} className="" />
+      <canvas ref={canvasRef} className="w-full h-full block overflow-hidden" />
     </div>
   );
 }
